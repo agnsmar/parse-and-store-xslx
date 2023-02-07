@@ -1,5 +1,5 @@
 import { prisma } from '../config/prisma'
-import { decodeHTML } from './decode'
+import { decodeHTML, extractBase64Image } from './decode'
 
 export const store = async (article: any): Promise<void> => {
   try {
@@ -14,6 +14,7 @@ export const store = async (article: any): Promise<void> => {
         categories: article.Kategori,
         description: article.Beskrivning,
         keywords: article.Nyckelord,
+        image: extractBase64Image(article['Lösning för handläggare']),
         solution: decodeHTML(article['Lösning för handläggare'])
       },
       update: {
@@ -22,6 +23,7 @@ export const store = async (article: any): Promise<void> => {
         categories: article.categories,
         keywords: article.Beskrivning,
         description: article.Nyckelord,
+        image: extractBase64Image(article['Lösning för handläggare']),
         solution: decodeHTML(article['Lösning för handläggare'])
       }
     })
