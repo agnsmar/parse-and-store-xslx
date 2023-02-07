@@ -16,6 +16,6 @@ model Article {
   categories  String?     
   description String?    
   keywords    String?     
-  solution    String     
-  image       String?
+  solution    String?     
+  image       String[]
 }
